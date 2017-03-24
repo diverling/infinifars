@@ -11,7 +11,7 @@ with open('infinitivesbreakout')  as ibr, open('infinitives') as inf, open('clea
         lets = list(line)
         #there are several other ways of adding keys/values to a dic
         letdic[lets[0]] = lets[-2]
-    #now we'll iterate through the messy pasted pdf and select only the bracketed material
+    #now we'll iterate through the messy pasted pdf and select only the bracketed material.
     for line in inf:
         #this is from the 'regular expression' module, which we imported in the first line. The following line returns a list of any series of characters which
         #match what we put before the comma (i.e. [anything at all]
@@ -29,7 +29,7 @@ with open('infinitivesbreakout')  as ibr, open('infinitives') as inf, open('clea
                 #treat them differently
                 firstlet = wordcut[0]
                 #now we create a variable that is the remainder of wordcut, that is, everything but the first (zeroth) letter
-                wordcutr = wordcut[1:] 
+                wordcutr = wordcut[1:]
                 #make an empty list that we'll append the "clean" letters into.
                 finalwordl = []
                 #now tricky part. For the majority of letters we just want the code to look up the letter in the dic we made, which
@@ -41,7 +41,7 @@ with open('infinitivesbreakout')  as ibr, open('infinitives') as inf, open('clea
                 #notice that we're not replacing the "word" in reline, we're just adding characters to a new list based on what characters are in the word.
                 if firstlet in shortvowels:
                     finalwordl.append('ا')
-                #now we iterate through the rest of the word. Note that in the letdic ɒ has a value of ا not آ  since it's only used for non-first letters   
+                #now we iterate through the rest of the word. Note that in the letdic ɒ has a value of ا not آ  since it's only used for non-first letters
                 for let in wordcutr:
                     if let in letdic.keys():
                         finalwordl.append(letdic[let])
@@ -52,5 +52,5 @@ with open('infinitivesbreakout')  as ibr, open('infinitives') as inf, open('clea
                 clinf.write(wordcut + "\n")
                 #no need to end the script or anything, it will just loop around (back up to "for word in..." and stop when it's out of words in reline,
                 #back up to "for line in inf" until there's no more lines, then it just stops.
-                #the cleaninf file should have the correct words, except the wierd ones, which might be quicker to fix by hand.
-                
+                #the cleaninf file should have the correct words, except the weird ones, which might be quicker to fix by hand.
+

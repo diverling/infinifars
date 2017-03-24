@@ -5,8 +5,10 @@ with open('cleaninf') as inf:
     infdic = {}
     infdic['vdan'] = []
     for rt in inf:
-        if rt[-3] == 'د' and rt[-4] =="و":
+        if len(rt) > 3 and rt[-3] == 'د' and rt[-4] =="و":
+            print(rt)
             infdic['vdan'].append(rt)
+
 with open('infrootsjson', 'w') as winf:
     winf.write(json.dumps(infdic))
 """
@@ -17,7 +19,7 @@ with open('UPCcleanjson', 'w') as ucj, open('UPCclean') as txt:
         words.append(line[:-1])
     ucjdic['words'] = words
     ucj.write(json.dumps(ucjdic))
-"""        
+"""
 
 
 with open('UPCcleanjson') as clfrq:
@@ -27,7 +29,7 @@ with open('UPCcleanjson') as clfrq:
     def vdan():
         rtslice = rt[:-4]
         drvl = list(rtslice)
-        drvl.append('ایش') 
+        drvl.append('ایش')
         pat = 'گشایش'
         drv = ''.join(drvl)
         if drv in clfrq:
@@ -40,7 +42,7 @@ with open('UPCcleanjson') as clfrq:
         rtslice = rt[:-2]
         #print(rtslice)
         drvl = list(rtslice)
-        drvl.append('گی') 
+        drvl.append('گی')
         pat = 'گشودگی'
         drv = ''.join(drvl)
         if drv in clfrq:
@@ -51,11 +53,11 @@ with open('UPCcleanjson') as clfrq:
                 if drv not in infprodic[rt]:
                     infprodic[rt][drv]= {'proc':  pat}
         #print(infprodic)
-                    
+
     for rt in infdic['vdan']:
         vdan()
     #print(infprodic)
-        
+
     with open('infprojson', 'w') as ipj:
         ipj.write(json.dumps(infprodic))
 
@@ -69,4 +71,4 @@ with open('UPCcleanjson') as clfrq:
                     upcpro[root][drv]= {'freq': freq, 'proc':  pat}
 
 """
-            
+
